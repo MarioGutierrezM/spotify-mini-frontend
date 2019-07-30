@@ -5,7 +5,7 @@ import { UserService } from '@app/services/user.service';
 @Component({
   selector: 'app-sing-up-form',
   templateUrl: './sing-up-form.component.html',
-  styleUrls: ['./sing-up-form.component.sass']
+  styleUrls: ['./sing-up-form.component.scss']
 })
 export class SingUpFormComponent implements OnInit {
 
@@ -13,8 +13,9 @@ export class SingUpFormComponent implements OnInit {
 
   user: User;
   userRegister: User;
-  errorMessage: String;
   alertRegister: String;
+  alertSuccess: Boolean;
+  logInFrom: Boolean = true;
 
   constructor(private _userService: UserService) {
     this.user = new User();
@@ -25,7 +26,7 @@ export class SingUpFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.errorMessage = null;
+    this.alertRegister = null;
     this._userService.singUp(this.user).subscribe(
       res => {
         const identity = res['user'];
@@ -40,7 +41,8 @@ export class SingUpFormComponent implements OnInit {
         }
       }, 
       error => {
-        this.errorMessage = error.error.error;
+        this.alertRegister = error.error.error;
+        this.alertSuccess = false;;
       }
     );
   }
@@ -49,12 +51,19 @@ export class SingUpFormComponent implements OnInit {
     this._userService.registerUser(this.userRegister).subscribe(
       res => {
         this.alertRegister = `User registered successfully: ${res['user'].email}`;
+        this.alertSuccess = true;
         this.userRegister = new User();
       },
       error => {
-        this.alertRegister = error.error.error;
+        this.alertRegister = error.error.msg.name;
+        this.alertSuccess = false;
       }
     );
+  }
+
+  changeForm() {
+    this.logInFrom = !this.logInFrom;
+    this.alertRegister = null;
   }
 
 }
