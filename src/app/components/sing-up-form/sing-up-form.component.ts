@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { User } from '@app/models/user';
+import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { UserService } from '@app/services/user.service';
 
 @Component({
@@ -15,14 +16,27 @@ export class SingUpFormComponent implements OnInit {
   userRegister: User;
   alertRegister: String;
   alertSuccess: Boolean;
-  logInFrom: Boolean = true;
+  isLogInFrom: Boolean = true;
 
-  constructor(private _userService: UserService) {
+  loginForm: FormGroup;
+  registerForm: FormGroup;
+
+  constructor(private _userService: UserService, private formBuilder: FormBuilder) {
     this.user = new User();
     this.userRegister = new User();
   }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['' , [Validators.email, Validators.required] ],
+      password: ['' , Validators.required],
+    });
+    this.registerForm = this.formBuilder.group({
+      name: ['' , Validators.required],
+      surname: ['' , Validators.required],
+      email: ['' , [Validators.email, Validators.required] ],
+      password: ['' , Validators.required],
+    });
   }
 
   onSubmit() {
@@ -32,7 +46,7 @@ export class SingUpFormComponent implements OnInit {
         const identity = res['user'];
         const token = res['token'];
         if (!token) {
-          alert("User could not log in succefully");
+          this.alertRegister = "User could not log in succefully";
         } else {
           localStorage.setItem('identity', JSON.stringify(identity));
           localStorage.setItem('token', token);
@@ -52,7 +66,7 @@ export class SingUpFormComponent implements OnInit {
       res => {
         this.alertRegister = `User registered successfully: ${res['user'].email}`;
         this.alertSuccess = true;
-        this.userRegister = new User();
+        // this.userRegister = new User();
       },
       error => {
         this.alertRegister = error.error.msg.name;
@@ -62,7 +76,7 @@ export class SingUpFormComponent implements OnInit {
   }
 
   changeForm() {
-    this.logInFrom = !this.logInFrom;
+    this.isLogInFrom = !this.isLogInFrom;
     this.alertRegister = null;
   }
 

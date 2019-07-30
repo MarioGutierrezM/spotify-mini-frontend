@@ -3,20 +3,32 @@
   <div class="form-container ">
 
     <!-- LOG IN -->
-    <div class="form-style animated fadeIn" *ngIf="logInFrom">
+    <div class="form-style animated fadeIn" *ngIf="isLogInFrom">
       <h1 class="login-text"> Log In </h1>
-      <form #loginForm="ngForm" class="form" (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit()">
         <p>
-          <input type="text" placeholder="Email" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control" required />
-          <span *ngIf="!email.valid && email.touched"> Email is required </span>
+          <input
+            type="text"
+            placeholder="Email"
+            formControlName="email"
+            class="form-control"
+            [(ngModel)]="user.email"
+            [ngClass]="{'is-invalid': loginForm.controls.email.errors}"
+          />
         </p>
         <p>
-          <input type="password" placeholder="Password" #password="ngModel" name="password" [(ngModel)]="user.password" class="form-control"
-            required />
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            class="form-control"
+            [(ngModel)]="user.password"
+            [ngClass]="{'is-invalid': loginForm.controls.password.errors}"
+          />
         </p>
-        <input type="submit" value="Log In" class="btn btn-primary btn-custom" />
+        <input type="submit" value="Log In" class="btn btn-primary btn-custom" [disabled]="loginForm.status !== 'VALID'" />
       </form>
-      <div class="change-form-style" (click)="changeForm()">  New here? Create an account.  </div>
+      <div class="change-form-style" (click)="changeForm()"> New here? Create an account. </div>
       <div class="alert" *ngIf="alertRegister" [ngClass]="{'alert-danger': !alertSuccess, 'alert-success': alertSuccess  }">
         {{ alertRegister }}
       </div>
@@ -24,30 +36,54 @@
 
 
     <!-- REGISTER -->
-    <div class="form-style animated fadeIn" *ngIf="!logInFrom">
+    <div class="form-style animated fadeIn" *ngIf="!isLogInFrom">
       <h1 class="login-text"> Create Account </h1>
-      <form class="form" #registerForm="ngForm" (ngSubmit)="onSubmitRegister()">
+      <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
         <p>
-          <input type="text" placeholder="First Name" class="form-control" #name="ngModel" name="name" [(ngModel)]="userRegister.name"
-            required />
-          <span *ngIf="!name.valid && name.touched"> Name is required </span>
+          <input
+            type="text"
+            placeholder="First Name"
+            class="form-control"
+            name="name"
+            [(ngModel)]="userRegister.name"
+            formControlName="name"
+            [ngClass]="{'is-invalid': registerForm.controls.name.errors}"
+          />
         </p>
         <p>
-          <input type="text" placeholder="Last Name" class="form-control" #surname="ngModel" name="surname" [(ngModel)]="userRegister.surname"
-            required />
-          <span *ngIf="!surname.valid && surname.touched"> Surname is required </span>
+          <input
+            type="text"
+            placeholder="Last Name"
+            class="form-control"
+            name="surname"
+            [(ngModel)]="userRegister.surname"
+            formControlName="surname"
+            [ngClass]="{'is-invalid': registerForm.controls.surname.errors}"
+          />
         </p>
         <p>
-          <input type="text" placeholder="Email" class="form-control" #email="ngModel" name="email" [(ngModel)]="userRegister.email"
-            required />
-          <span *ngIf="!email.valid && email.touched"> Email is required </span>
+          <input
+            type="text"
+            placeholder="Email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="userRegister.email"
+            formControlName="email"
+            [ngClass]="{'is-invalid': registerForm.controls.email.errors}"
+          />
         </p>
         <p>
-          <input type="password" placeholder="Password" class="form-control" #password="ngModel" name="password"
-            [(ngModel)]="userRegister.password" required />
-          <span *ngIf="!password.valid && password.touched"> Password is required </span>
+          <input
+            type="password"
+            placeholder="Password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="userRegister.password"
+            formControlName="password"
+            [ngClass]="{'is-invalid': registerForm.controls.password.errors}"
+          />
         </p>
-        <input type="submit" value="Sign In" class="btn btn-primary btn-custom" />
+        <input type="submit" value="Sign In" class="btn btn-primary btn-custom" [disabled]="registerForm.status !== 'VALID'"/>
       </form>
       <div class="change-form-style" (click)="changeForm()"> Have an account? Login. </div>
       <div class="alert" *ngIf="alertRegister" [ngClass]="{'alert-danger': !alertSuccess, 'alert-success': alertSuccess }">
