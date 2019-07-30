@@ -1,0 +1,60 @@
+<div class="row m-3" *ngIf="!identity">
+
+  <!-- LOG IN --> 
+  <div class="col-lg-6 col-md-6">
+    <h1>Log In </h1>
+    <form #loginForm="ngForm" class="col-md-8" (ngSubmit)="onSubmit()">
+      <p>
+        <label> Email: </label>
+        <input type="text" #email="ngModel" name="email" [(ngModel)]="user.email" class="form-control" required />
+        <span *ngIf="!email.valid && email.touched"> Email is required </span>
+      </p>
+      <p>
+        <label> Password: </label>
+        <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" class="form-control"
+          required />
+      </p>
+
+      <input type="submit" value="Log In" class="btn btn-primary" />
+    </form>
+    <div class="alert alert-danger" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
+
+
+  <!-- REGISTER --> 
+  <div class="col-lg-6 col-md-6">
+    <h1> Sing In </h1>
+    <form class="col-md-8" #registerForm="ngForm" (ngSubmit)="onSubmitRegister()">
+      <p>
+        <label> First Name: </label>
+        <input type="text" class="form-control" #name="ngModel" name="name" [(ngModel)]="userRegister.name" required />
+        <span *ngIf="!name.valid && name.touched"> Name is required </span>
+      </p>
+      <p>
+        <label> Last Name: </label>
+        <input type="text" class="form-control" #surname="ngModel" name="surname" [(ngModel)]="userRegister.surname"
+          required />
+        <span *ngIf="!surname.valid && surname.touched"> Surname is required </span>
+      </p>
+      <p>
+        <label> Email: </label>
+        <input type="text" class="form-control" #email="ngModel" name="email" [(ngModel)]="userRegister.email"
+          required />
+        <span *ngIf="!email.valid && email.touched"> Email is required </span>
+      </p>
+      <p>
+        <label> Password: </label>
+        <input type="password" class="form-control" #password="ngModel" name="password"
+          [(ngModel)]="userRegister.password" required />
+        <span *ngIf="!password.valid && password.touched"> Password is required </span>
+      </p>
+
+      <input type="submit" value="Sign In" class="btn btn-primary" />
+    </form>
+    <div class="alert alert-danger" *ngIf="alertRegister">
+      {{ alertRegister }}
+    </div>
+  </div>
+</div>
