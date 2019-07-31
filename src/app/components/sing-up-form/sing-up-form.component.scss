@@ -31,7 +31,11 @@
           border-color: #4E8689;
         }
 
-        p {
+        .form-row-custom {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
           margin-bottom: 2rem;
         }
       }

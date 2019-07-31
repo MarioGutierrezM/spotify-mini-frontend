@@ -6,26 +6,24 @@
     <div class="form-style animated fadeIn" *ngIf="isLogInFrom">
       <h1 class="login-text"> Log In </h1>
       <form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit()">
-        <p>
+        <div class="form-row-custom">
           <input
             type="text"
             placeholder="Email"
             formControlName="email"
             class="form-control"
-            [(ngModel)]="user.email"
-            [ngClass]="{'is-invalid': loginForm.controls.email.errors}"
+            [ngClass]="{'is-invalid': loginForm.controls.email.errors && loginForm.controls.email.dirty }"
           />
-        </p>
-        <p>
+        </div>
+        <div class="form-row-custom">
           <input
             type="password"
             placeholder="Password"
             formControlName="password"
             class="form-control"
-            [(ngModel)]="user.password"
-            [ngClass]="{'is-invalid': loginForm.controls.password.errors}"
+            [ngClass]="{'is-invalid': loginForm.controls.password.errors && loginForm.controls.password.dirty }"
           />
-        </p>
+        </div>
         <input type="submit" value="Log In" class="btn btn-primary btn-custom" [disabled]="loginForm.status !== 'VALID'" />
       </form>
       <div class="change-form-style" (click)="changeForm()"> New here? Create an account. </div>
@@ -39,50 +37,58 @@
     <div class="form-style animated fadeIn" *ngIf="!isLogInFrom">
       <h1 class="login-text"> Create Account </h1>
       <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
-        <p>
+        <div class="form-row-custom">
           <input
             type="text"
             placeholder="First Name"
             class="form-control"
             name="name"
-            [(ngModel)]="userRegister.name"
             formControlName="name"
-            [ngClass]="{'is-invalid': registerForm.controls.name.errors}"
+            [ngClass]="{'is-invalid': registerForm.controls.name.errors && registerForm.controls.name.dirty }"
           />
-        </p>
-        <p>
+        </div>
+        <div class="form-row-custom">
           <input
             type="text"
             placeholder="Last Name"
             class="form-control"
             name="surname"
-            [(ngModel)]="userRegister.surname"
             formControlName="surname"
-            [ngClass]="{'is-invalid': registerForm.controls.surname.errors}"
+            [ngClass]="{'is-invalid': registerForm.controls.surname.errors && registerForm.controls.surname.dirty }"
           />
-        </p>
-        <p>
+        </div>
+        <div class="form-row-custom">
           <input
             type="text"
             placeholder="Email"
             class="form-control"
             name="email"
-            [(ngModel)]="userRegister.email"
             formControlName="email"
-            [ngClass]="{'is-invalid': registerForm.controls.email.errors}"
+            [ngClass]="{'is-invalid': registerForm.controls.email.errors && registerForm.controls.email.dirty }"
           />
-        </p>
-        <p>
+        </div>
+        <div class="form-row-custom">
           <input
             type="password"
+            (keyup)="comparePasswords()"
             placeholder="Password"
             class="form-control"
             name="password"
-            [(ngModel)]="userRegister.password"
             formControlName="password"
-            [ngClass]="{'is-invalid': registerForm.controls.password.errors}"
+            [ngClass]="{'is-invalid': registerForm.controls.password.errors && registerForm.controls.password.dirty || !samePassword }"
           />
-        </p>
+        </div>
+        <div class="form-row-custom">
+          <input
+            type="password"
+            (keyup)="comparePasswords()"
+            placeholder="Confirm Password"
+            class="form-control"
+            name="confirmPassword"
+            formControlName="confirmPassword"
+            [ngClass]="{'is-invalid': registerForm.controls.confirmPassword.errors && registerForm.controls.confirmPassword.dirty || !samePassword }"
+          />
+        </div>
         <input type="submit" value="Sign In" class="btn btn-primary btn-custom" [disabled]="registerForm.status !== 'VALID'"/>
       </form>
       <div class="change-form-style" (click)="changeForm()"> Have an account? Login. </div>

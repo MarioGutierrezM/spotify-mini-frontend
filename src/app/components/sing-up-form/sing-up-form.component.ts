@@ -12,18 +12,15 @@ export class SingUpFormComponent implements OnInit {
 
   @Output() identityOut = new EventEmitter();
 
-  user: User;
-  userRegister: User;
   alertRegister: String;
   alertSuccess: Boolean;
   isLogInFrom: Boolean = true;
+  samePassword: Boolean = true;
 
   loginForm: FormGroup;
   registerForm: FormGroup;
 
   constructor(private _userService: UserService, private formBuilder: FormBuilder) {
-    this.user = new User();
-    this.userRegister = new User();
   }
 
   ngOnInit() {
@@ -36,12 +33,13 @@ export class SingUpFormComponent implements OnInit {
       surname: ['' , Validators.required],
       email: ['' , [Validators.email, Validators.required] ],
       password: ['' , Validators.required],
+      confirmPassword: ['' , Validators.required],
     });
   }
 
   onSubmit() {
     this.alertRegister = null;
-    this._userService.singUp(this.user).subscribe(
+    this._userService.singUp(this.loginForm.value).subscribe(
       res => {
         const identity = res['user'];
         const token = res['token'];
@@ -50,7 +48,7 @@ export class SingUpFormComponent implements OnInit {
         } else {
           localStorage.setItem('identity', JSON.stringify(identity));
           localStorage.setItem('token', token);
-          this.userRegister = new User();
+          this.registerForm.reset();
           this.identityOut.emit({ identity, token })
         }
       }, 
@@ -62,11 +60,10 @@ export class SingUpFormComponent implements OnInit {
   }
 
   onSubmitRegister() {
-    this._userService.registerUser(this.userRegister).subscribe(
+    this._userService.registerUser(this.registerForm.value).subscribe(
       res => {
         this.alertRegister = `User registered successfully: ${res['user'].email}`;
         this.alertSuccess = true;
-        // this.userRegister = new User();
       },
       error => {
         this.alertRegister = error.error.msg.name;
@@ -78,6 +75,14 @@ export class SingUpFormComponent implements OnInit {
   changeForm() {
     this.isLogInFrom = !this.isLogInFrom;
     this.alertRegister = null;
+    this.loginForm.reset();
+    this.registerForm.reset();
+  }
+
+  comparePasswords() {
+    const pass1 = this.registerForm.value.password;
+    const pass2 = this.registerForm.value.confirmPassword;
+    this.samePassword = (pass1 === pass2) ? true : false;
   }
 
 }
