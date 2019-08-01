@@ -7,11 +7,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SingUpFormComponent } from './components/sing-up-form/sing-up-form.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SingUpFormComponent
+    SingUpFormComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,

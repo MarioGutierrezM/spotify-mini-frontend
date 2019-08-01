@@ -1,8 +1,47 @@
-<div class="navigation col-lg-1 col-md-1" *ngIf="identity">
-  <h1>
-    {{ title }}
-  </h1>
-  <div class="btn btn-danger" (click)="logOut()"> Log Out </div>
+<div class="row app-container">
+
+  <div class="navigation-bar col-lg-2 col-md-2" *ngIf="identity">
+    <div class="brand ">
+      {{ title }} 
+    </div>
+  
+    <div class="item cursorDefault">
+      <img
+        src="{{ url + '/get-image-user/' + identity.image }}"
+        class="img-container"
+        *ngIf="identity.image"/>
+      <img
+        src="../assets/images/default-user.png"
+        class="img-container"
+        *ngIf="!identity.image"/>
+      <h4 class="">{{ identity.name }}</h4>
+    </div>
+    
+    <div [routerLink]="['/user-info']" class="item item-flex">
+      <i class="material-icons mr-2"> child_care </i>
+      <div> Artists </div>
+    </div>
+
+    <div [routerLink]="['/user-info']" class="item item-flex">
+      <i class="material-icons mr-2"> disc_full </i>
+      <div> Albums </div>
+    </div>
+
+    <div [routerLink]="['/user-info']" class="item item-flex">
+      <i class="material-icons mr-2"> settings </i>
+      <div> Edit info </div>
+    </div>
+    
+    <div class="item item-flex" (click)="logOut()">
+      <i class="material-icons mr-2"> power_settings_new </i> 
+      <div>  Log Out </div>
+    </div>
+  </div>
+  
+  <div class="col-lg-10 col-md-10 content-col" *ngIf="identity">
+    <router-outlet></router-outlet>
+  </div>
+
 </div>
 
 <app-sing-up-form

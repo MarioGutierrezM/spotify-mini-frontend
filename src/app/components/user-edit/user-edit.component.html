@@ -1,0 +1,65 @@
+<!-- UPDATE INFO -->
+<div class="user-edit">
+  <div class="form-container">
+
+    <div class="form-style animated fadeIn" *ngIf="!isLogInFrom">
+      <h1 class="login-text"> Edit Information </h1>
+      <form class="form" [formGroup]="updateForm" (ngSubmit)="onSubmitUpdate()">
+        <div class="form-row-custom">
+          <input
+            type="text"
+            placeholder="First Name"
+            class="form-control"
+            name="name"
+            formControlName="name"
+            [ngClass]="{'is-invalid': updateForm.controls.name.errors && updateForm.controls.name.dirty }" />
+        </div>
+        <div class="form-row-custom">
+          <input
+            type="text"
+            placeholder="Last Name"
+            class="form-control"
+            name="surname"
+            formControlName="surname"
+            [ngClass]="{'is-invalid': updateForm.controls.surname.errors && updateForm.controls.surname.dirty }" />
+        </div>
+        <div class="form-row-custom">
+          <input
+            type="text"
+            placeholder="Email"
+            class="form-control"
+            name="email"
+            formControlName="email"
+            [ngClass]="{'is-invalid': updateForm.controls.email.errors && updateForm.controls.email.dirty }"/>
+        </div>
+
+        <div class="form-row-custom">
+          <img
+            src="{{ url + '/get-image-user/' + updateForm.controls.image.value }}"
+            class="img-container"
+            *ngIf="updateForm.controls.image.value"/>
+          <img
+            src="../../../assets/images/default-user.png"
+            class="img-container"
+            *ngIf="!updateForm.controls.image.value"/>
+        </div>
+        
+        <div class="form-row-custom">
+          <input
+            (change)="fileChangeEvent($event)"
+            type="file"
+            placeholder="Image"
+            class="form-control"
+            [ngClass]="{'is-invalid': updateForm.controls.image.errors && updateForm.controls.image.dirty }"
+          />
+        </div>
+        <input type="submit" value="Update Info" class="btn btn-primary btn-custom" [disabled]="updateForm.status !== 'VALID'" />
+      </form>
+
+      <div class="alert animated fadeIn" *ngIf="alertUpdate" [ngClass]="{'alert-danger': !alertSuccess, 'alert-success': alertSuccess }">
+        {{ alertUpdate }}
+      </div>
+    </div>
+    
+  </div>
+</div>

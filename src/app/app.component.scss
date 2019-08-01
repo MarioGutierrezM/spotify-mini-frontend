@@ -1,0 +1,58 @@
+.app-container {
+  margin-right: 0px;
+  margin-left: 0px;
+
+  .navigation-bar {
+    border: 0px solid black;
+    background-color: black;
+    color: white;
+    height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+    padding-right: 15px;
+    padding-left: 15px; 
+
+    .img-container {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 5px;
+      border: 1px solid white;
+    }
+
+    .brand {
+      background-color: green;
+      width: 100%;
+      text-align: center;
+    }
+
+    .item {
+      background-color: black;
+      width: 100%;
+      text-align: center;
+      border: 0;
+      border-bottom: 1px solid white;
+      padding: 1rem 0 1rem 0;
+      cursor: pointer;
+    }
+    div.item-flex:hover {
+      background-color: #4E8689;
+    }
+    .item-flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .cursorDefault {
+      cursor: default;
+    }
+  }
+  
+  .content-col {
+    padding: 0;
+  }
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GLOBAL } from "@app/services/global";
 
@@ -13,9 +13,13 @@ export class UserService {
   identity: Object;
   token: String;
 
+  identiyiFromEditUser = new Subject();
+
   constructor(private _http: HttpClient) {
     this.url = GLOBAL.url;
   }
+
+  //  API CALLS
 
   singUp(user, getHas?) {
     user['getHas'] = (getHas) ? getHas : null;
@@ -40,5 +44,22 @@ export class UserService {
     const url = `${this.url}/register`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this._http.post(url, user, { headers }).pipe(map(res => res));
+  }
+
+  updateUser(user, id) {
+    const url = `${this.url}/update-user/${id}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': this.getToken() });
+    return this._http.put(url, user, { headers }).pipe(map(res => res));
+  }
+
+
+  //  API CALLS
+
+  updateIdentity(identity) {
+    this.identiyiFromEditUser.next(identity);
+  }
+
+  getIdentityUpdated() {
+    return this.identiyiFromEditUser.asObservable();
   }
 } 
