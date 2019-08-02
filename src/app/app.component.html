@@ -9,25 +9,30 @@
       <img
         src="{{ url + '/get-image-user/' + identity.image }}"
         class="img-container"
-        *ngIf="identity.image"/>
+        *ngIf="identity.image && identity.image != 'null'"/>
       <img
         src="../assets/images/default-user.png"
         class="img-container"
-        *ngIf="!identity.image"/>
+        *ngIf="!identity.image || identity.image == 'null'"/>
       <h4 class="">{{ identity.name }}</h4>
     </div>
     
-    <div [routerLink]="['/user-info']" class="item item-flex">
+    <div [routerLink]="['/home']" [routerLinkActive]="['actived']" class="item item-flex">
+      <i class="material-icons mr-2"> home </i>
+      <div> Home </div>
+    </div>
+
+    <div [routerLink]="['/artist-list']" [routerLinkActive]="['actived']" class="item item-flex">
       <i class="material-icons mr-2"> child_care </i>
       <div> Artists </div>
     </div>
 
-    <div [routerLink]="['/user-info']" class="item item-flex">
+    <div [routerLink]="['/album-list']" [routerLinkActive]="['actived']" class="item item-flex">
       <i class="material-icons mr-2"> disc_full </i>
       <div> Albums </div>
     </div>
 
-    <div [routerLink]="['/user-info']" class="item item-flex">
+    <div [routerLink]="['/user-info']" [routerLinkActive]="['actived']" class="item item-flex">
       <i class="material-icons mr-2"> settings </i>
       <div> Edit info </div>
     </div>

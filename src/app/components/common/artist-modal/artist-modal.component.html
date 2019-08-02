@@ -1,0 +1,50 @@
+<div class="artist-modal">
+  <div class="header">
+    <h1> {{ title }}</h1>
+    <h2> <i class="material-icons pointer" (click)="closeModal()"> clear </i> </h2>
+  </div>
+
+  <div class="body">
+    <form class="form" [formGroup]="artistForm" (ngSubmit)="onSubmit()">
+      <div class="form-row-custom">
+        <input
+          type="text"
+          placeholder="Name"
+          class="form-control"
+          name="name"
+          formControlName="name"
+          [ngClass]="{'is-invalid': artistForm.controls.name.errors && artistForm.controls.name.dirty }" />
+      </div>
+
+      <div class="form-row-custom">
+        <input
+          type="text"
+          placeholder="Description"
+          class="form-control"
+          name="description"
+          formControlName="description"
+          [ngClass]="{'is-invalid': artistForm.controls.description.errors && artistForm.controls.description.dirty }" />
+      </div>
+        
+      <div class="form-row-custom" *ngIf="modalMode !== 'create'">
+        <img src="{{ imageUrl }}" class="img-container"/>
+      </div>
+        
+      <div class="form-row-custom" *ngIf="modalMode !== 'create'">
+        <input
+          (change)="fileChangeEvent($event)"
+          type="file"
+          placeholder="Image"
+          class="form-control"
+          [ngClass]="{'is-invalid': artistForm.controls.image.errors && artistForm.controls.image.dirty }"
+        />
+      </div>
+      <input type="submit" value="{{ btnText }}" class="btn btn-primary btn-custom" [disabled]="artistForm.status !== 'VALID'" />
+    </form>
+
+    <div class="alert animated fadeIn" *ngIf="alertMessage" [ngClass]="{'alert-danger': !alertSuccess, 'alert-success': alertSuccess }">
+      {{ alertMessage }}
+    </div>
+
+  </div>
+</div>

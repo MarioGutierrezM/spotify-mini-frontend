@@ -37,11 +37,11 @@
           <img
             src="{{ url + '/get-image-user/' + updateForm.controls.image.value }}"
             class="img-container"
-            *ngIf="updateForm.controls.image.value"/>
+            *ngIf="updateForm.controls.image.value && updateForm.controls.image.value !== 'null'"/>
           <img
             src="../../../assets/images/default-user.png"
             class="img-container"
-            *ngIf="!updateForm.controls.image.value"/>
+            *ngIf="!updateForm.controls.image.value || updateForm.controls.image.value == 'null'"/>
         </div>
         
         <div class="form-row-custom">

@@ -1,0 +1,23 @@
+<div class="artist-list">
+  <div class="artist-list-card">
+    <div class="card-header">
+      <h1>Artists</h1>
+      <button class="btn btn-secondary" *ngIf="identity.role === 'ROLE_ADMIN'" (click)="addArtist()"> Add Artist </button>
+    </div>
+
+    <div class="card-body" *ngIf="artistList">
+      <div class="artist-item" *ngFor="let artist of artistList">
+        <app-artist-item
+          [artist]="artist"
+          (updateArtistOut)="updateArtist($event)" 
+          (deleteArtistOut)="deleteArtist($event)"
+        ></app-artist-item>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      N A V I G A T I O N
+    </div>
+  </div>
+
+</div>

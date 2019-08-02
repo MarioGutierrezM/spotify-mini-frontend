@@ -1,0 +1,14 @@
+<div class="artist-item">
+  <div class="img-container" (mouseover)="onMouseOver()" >
+    <img class="artist-img" src="{{ imageUrl }}" [ngClass]="{'filter': showOptions }">
+    <div class="options-box" *ngIf="showOptions" (mouseout)="onMouseOut()"> 
+      <i class="material-icons" (click)="updateArtist()"> create </i>
+      <i class="material-icons" (click)="deleteArtist()"> delete </i>
+    </div>
+  </div>
+
+  <div class="name">
+    {{ artist.name }}
+  </div>
+
+</div>

@@ -1,0 +1,49 @@
+.artist-item {
+  width: 14rem;
+  height: 14rem;
+  margin: 1rem;
+  border: 1px solid white;
+  position: relative;
+
+  .img-container {
+    height: 14rem;
+    width: 14rem;
+    
+    .artist-img {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .filter {
+      filter: blur(5px);
+    }
+
+    .options-box {
+      position: absolute;
+      border: 3px solid white;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        margin: 1rem;
+        cursor: pointer;
+      }
+    }
+  }
+
+
+  .name {
+    text-align: center;
+  }
+}
