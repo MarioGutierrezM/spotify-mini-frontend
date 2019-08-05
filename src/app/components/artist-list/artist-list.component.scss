@@ -16,10 +16,12 @@
     align-items: center;
     border: 2px solid black;
     height: 95%;
+    max-height: 95%;
     width: 95%;
     background-color: $background-primary;
     color: white;
     padding: 2rem;
+    overflow: hidden;
 
     .card-header {
       border: 1px solid white;
@@ -30,6 +32,16 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1rem;
+
+      .btn-custom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $green-primary;
+        i {
+          margin-right: 1rem;
+        }
+      }
     }
 
     .card-body {

@@ -16,6 +16,7 @@ import { ArtistListComponent } from './components/artist-list/artist-list.compon
 import { HomeComponent } from './components/home/home.component';
 import { ArtistModalComponent } from './components/common/artist-modal/artist-modal.component';
 import { ArtistItemComponent } from './components/common/artist-item/artist-item.component';
+import { PaginationBarComponent } from './components/common/pagination-bar/pagination-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ArtistItemComponent } from './components/common/artist-item/artist-item
     ArtistListComponent,
     HomeComponent,
     ArtistModalComponent,
-    ArtistItemComponent
+    ArtistItemComponent,
+    PaginationBarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+@import '../../../../assets/variables.scss';
+
+.pagination {
+  user-select: none;
+
+  .page-item {
+    cursor: pointer;
+
+    .page-link {
+      background-color: $green-primary;
+    }
+  }
+
+  .page-item.active
+  .page-link {
+    background-color: $green-secondary;
+    border-color: white;
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    
+    a {
+      color: #00000078;
+    }
+  }
+}

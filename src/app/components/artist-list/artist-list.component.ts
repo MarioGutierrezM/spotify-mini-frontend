@@ -19,6 +19,8 @@ export class ArtistListComponent implements OnInit {
   artistList: Array<any> = [];
   totalItems: Number = 0;
 
+  currentPage: number = 1;
+
   constructor(
     private _userService: UserService,
     private _artistService: ArtistService,
@@ -28,11 +30,11 @@ export class ArtistListComponent implements OnInit {
   ngOnInit() {
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
-    this.getArtistList();
+    this.getArtistList(1);
   }
 
-  getArtistList() {
-    this._artistService.getArtistList(this.token, 1).subscribe(
+  getArtistList(page) {
+    this._artistService.getArtistList(this.token, page).subscribe(
       res => {
         this.artistList = res['artistList'];
         this.totalItems = res['totalItems'];
@@ -54,7 +56,7 @@ export class ArtistListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(data => {
-      this.getArtistList();
+      this.getArtistList(this.currentPage);
     });
   }
 
@@ -72,7 +74,7 @@ export class ArtistListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(data => {
-      this.getArtistList();
+      this.getArtistList(this.currentPage);
     });
   }
 
@@ -90,8 +92,13 @@ export class ArtistListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(data => {
-      this.getArtistList();
+      this.getArtistList(this.currentPage);
     });
+  }
+
+  goToPage(page) {
+    this.getArtistList(page);
+    this.currentPage = page;
   }
 
 }

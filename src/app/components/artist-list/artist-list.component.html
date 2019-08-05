@@ -2,7 +2,9 @@
   <div class="artist-list-card">
     <div class="card-header">
       <h1>Artists</h1>
-      <button class="btn btn-secondary" *ngIf="identity.role === 'ROLE_ADMIN'" (click)="addArtist()"> Add Artist </button>
+      <button class="btn btn-secondary btn-custom" *ngIf="identity.role === 'ROLE_ADMIN'" (click)="addArtist()">
+        <i class="material-icons"> person_add </i> Add Artist 
+      </button>
     </div>
 
     <div class="card-body" *ngIf="artistList">
@@ -16,7 +18,11 @@
     </div>
 
     <div class="card-footer">
-      N A V I G A T I O N
+      <app-pagination-bar
+        *ngIf="totalItems"
+        [totalItems]="totalItems"
+        (goToPageOut)="goToPage($event)"
+      ></app-pagination-bar>
     </div>
   </div>
 
