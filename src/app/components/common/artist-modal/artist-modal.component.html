@@ -37,6 +37,7 @@
           placeholder="Image"
           class="form-control"
           [ngClass]="{'is-invalid': artistForm.controls.image.errors && artistForm.controls.image.dirty }"
+          [disabled]="modalMode == 'delete'"
         />
       </div>
       <input type="submit" value="{{ btnText }}" class="btn btn-primary btn-custom" [disabled]="artistForm.status !== 'VALID'" />

@@ -40,9 +40,10 @@ export class ArtistModalComponent implements OnInit {
   ngOnInit() {
     this.token = this._userService.getToken();
     this.identity = this._userService.getToken();
+    const isDisabled = (this.data.modalMode === 'delete') ? true : false;
     this.artistForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
+      name: [{ value: '', disabled: isDisabled }, Validators.required],
+      description: [{ value: '', disabled: isDisabled }, Validators.required],
       image: [''],
       _id: ['']
     });
@@ -60,16 +61,22 @@ export class ArtistModalComponent implements OnInit {
     if(artist) {
       const { name, description, image, _id } = artist;
       this.artistForm.patchValue({ name, description, image, _id });
-      const webImage = `${this.url}/get-image-user/${image}`;
+      const webImage = `${this.url}/get-image-artist/${image}`;
       const defaultImage = '../../../../assets/images/default-user.png';
       this.imageUrl = (image && image !== 'null') ? webImage : defaultImage;
     }
   }
 
   onSubmit() {
-    const endpoint = (this.modalMode === 'create')
-      ? this._artistService.createArtist(this.token, this.artistForm.value)
-      : this._artistService.updateArtist(this.token, this.artistForm.value);
+    let endpoint;
+    switch(this.modalMode) {
+      case 'create': endpoint = this._artistService.createArtist(this.token, this.artistForm.value);
+      break;
+      case 'edit': endpoint = this._artistService.updateArtist(this.token, this.artistForm.value);
+      break;
+      case 'delete': endpoint = this._artistService.deleteArtist(this.token, this.artistForm.value);
+      break;
+    }
 
     endpoint.subscribe(
       res => {

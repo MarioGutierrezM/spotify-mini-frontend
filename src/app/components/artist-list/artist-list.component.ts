@@ -54,7 +54,7 @@ export class ArtistListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(data => {
-      console.log('CLOSE DIALOG');
+      this.getArtistList();
     });
   }
 
@@ -76,8 +76,22 @@ export class ArtistListComponent implements OnInit {
     });
   }
 
-  deleteArtist() {
+  deleteArtist(artist) {
+    const dialogRef = this.dialog.open(ArtistModalComponent, {
+      width: '40rem',
+      data: {
+        title: 'Delete Artist',
+        btnText: 'Delete Artist',
+        alertSuccesText: 'Artist has been deleted',
+        alertErrorText: "Artist couldn't be deleted",
+        modalMode: 'delete',
+        artist
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(data => {
+      this.getArtistList();
+    });
   }
 
 }

@@ -33,8 +33,8 @@ export class ArtistService {
     return this._http.put(url, artist, { headers }).pipe(map(res => res));
   }
 
-  deleteArtist(token, id) {
-    const url = `${this.url}/artist/${id}`;
+  deleteArtist(token, artist) {
+    const url = `${this.url}/artist/${artist._id}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.delete(url, { headers }).pipe(map(res => res));
   }

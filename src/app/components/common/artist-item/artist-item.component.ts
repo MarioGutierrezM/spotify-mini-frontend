@@ -38,7 +38,7 @@ export class ArtistItemComponent implements OnInit {
   }
 
   deleteArtist() {
-    this.deleteArtistOut.emit({ artistId: this.artist['_id'] });
+    this.deleteArtistOut.emit(this.artist);
   }
 
 }
