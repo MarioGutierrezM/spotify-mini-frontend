@@ -38,4 +38,10 @@ export class ArtistService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.delete(url, { headers }).pipe(map(res => res));
   }
+
+  getArtistDetail(token, artistId) {
+    const url = `${this.url}/artist/${artistId}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.get(url, { headers }).pipe(map(res => res));
+  }
 }

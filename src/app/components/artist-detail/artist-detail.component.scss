@@ -1,6 +1,6 @@
 @import '../../../assets/variables.scss';
 
-.artist-list {
+.artist-detail {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
   background-position: center;
   height: 100vh;
 
-  .artist-list-card {
+  .artist-detail-card {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -52,7 +52,47 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: flex-start;
-      flex-wrap: wrap;
+
+      .artist-info {
+        padding: 3rem;
+
+        .artist-img {
+          width: 15rem;
+          height: auto;
+          margin-bottom: 1rem;
+        }
+      }
+
+      .artist-albums-list {
+        padding: 3rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: 100%;
+        overflow: auto;
+        border-left: 1px solid white;
+
+        .artist-album {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+
+          .artist-texts {
+
+          }
+
+          .artist-img {
+            width: 10rem;
+            height: auto;
+            margin-bottom: 1.5rem;
+            margin-right: 1.5rem;
+          }
+        }
+
+      }
 
     }
   }

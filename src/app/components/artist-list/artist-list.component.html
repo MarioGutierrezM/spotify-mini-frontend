@@ -11,6 +11,7 @@
       <div class="artist-item" *ngFor="let artist of artistList">
         <app-artist-item
           [artist]="artist"
+          [userRole]="identity.role"
           (updateArtistOut)="updateArtist($event)" 
           (deleteArtistOut)="deleteArtist($event)"
         ></app-artist-item>

@@ -2,8 +2,9 @@
   <div class="img-container" (mouseover)="onMouseOver()" >
     <img class="artist-img" src="{{ imageUrl }}" [ngClass]="{'filter': showOptions }">
     <div class="options-box" *ngIf="showOptions" (mouseout)="onMouseOut()"> 
-      <i class="material-icons" (click)="updateArtist()"> create </i>
-      <i class="material-icons" (click)="deleteArtist()"> delete </i>
+      <i class="material-icons" (click)="goArtistDetail()"> send </i>
+      <i class="material-icons" (click)="updateArtist()" *ngIf="userRole === 'ROLE_ADMIN'"> create </i>
+      <i class="material-icons" (click)="deleteArtist()" *ngIf="userRole === 'ROLE_ADMIN'"> delete </i>
     </div>
   </div>
 

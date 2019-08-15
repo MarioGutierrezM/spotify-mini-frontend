@@ -1,0 +1,29 @@
+<div class="artist-detail">
+
+  <div class="artist-detail-card">
+    <div class="card-header">
+      <h1>Artist</h1>
+    </div>
+
+    <div class="card-body" *ngIf="artistData">
+
+      <div class="artist-info">
+        <img class="artist-img" src="{{ artistData.image }}">
+        <h3> {{ artistData.name }}</h3>
+        <h4> {{ artistData.description }}</h4>
+      </div>
+
+      <div class="artist-albums-list" *ngIf="albumList">
+        <div class="artist-album" *ngFor=" let album of albumList">
+          <img class="artist-img" src="{{ album.image }}">
+          <div class="artist-texts">
+            <h3> {{ album.title }}</h3>
+            <h4> {{ album.description }}</h4>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

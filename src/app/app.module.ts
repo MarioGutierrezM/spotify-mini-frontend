@@ -17,6 +17,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ArtistModalComponent } from './components/common/artist-modal/artist-modal.component';
 import { ArtistItemComponent } from './components/common/artist-item/artist-item.component';
 import { PaginationBarComponent } from './components/common/pagination-bar/pagination-bar.component';
+import { ArtistDetailComponent } from './components/artist-detail/artist-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PaginationBarComponent } from './components/common/pagination-bar/pagin
     HomeComponent,
     ArtistModalComponent,
     ArtistItemComponent,
-    PaginationBarComponent
+    PaginationBarComponent,
+    ArtistDetailComponent
   ],
   imports: [
     BrowserModule,
