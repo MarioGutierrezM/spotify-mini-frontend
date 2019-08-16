@@ -1,3 +1,29 @@
 <div class="album-list">
+  <div class="album-list-card">
+    <div class="card-header">
+      <h1>Albums</h1>
+      <!-- <button class="btn btn-secondary btn-custom" *ngIf="identity.role === 'ROLE_ADMIN'" (click)="addAlbum()">
+        <i class="material-icons"> person_add </i> Add Album 
+      </button> -->
+    </div>
 
+    <div class="card-body" *ngIf="albumList">
+      <div class="artist-item" *ngFor="let album of albumList">
+        <app-artist-item
+          [album]="album"
+          [userRole]="identity.role"
+          (updateArtistOut)="updateAlbum($event)" 
+          (deleteArtistOut)="deleteAlbum($event)"
+        ></app-artist-item>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <app-pagination-bar
+        *ngIf="totalItems"
+        [totalItems]="totalItems"
+        (goToPageOut)="goToPage($event)"
+      ></app-pagination-bar>
+    </div>
+  </div>
 </div>

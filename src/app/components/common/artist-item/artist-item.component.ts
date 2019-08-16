@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Artist } from '@app/models/artist';
 import { GLOBAL } from '@app/services/global';
 import { Router } from '@angular/router';
+import { Album } from '@app/models/album';
 
 @Component({
   selector: 'app-artist-item',
@@ -11,9 +12,11 @@ import { Router } from '@angular/router';
 export class ArtistItemComponent implements OnInit {
 
   @Input() artist: Artist;
+  @Input() album: Album;
   @Input() userRole: string;
   @Output() updateArtistOut = new EventEmitter();
   @Output() deleteArtistOut = new EventEmitter();
+  @Output() goToPage = new EventEmitter();
 
   url: String = GLOBAL.url;
   imageUrl: String;
@@ -22,9 +25,17 @@ export class ArtistItemComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.imageUrl = (this.artist.image && this.artist.image !== 'null') 
-      ? `${this.url}/get-image-artist/${this.artist.image}`
-      : `../../../../assets/images/default-artist.jpeg`;
+    if (this.artist) {
+      this.imageUrl = (this.artist.image && this.artist.image !== 'null') 
+        ? `${this.url}/get-image-artist/${this.artist.image}`
+        : `../../../../assets/images/default-artist.jpeg`;
+    }
+
+    if (this.album) {
+      this.imageUrl = (this.album.image && this.album.image !== 'null') 
+        ? `${this.url}/get-image-album/${this.album.image}`
+        : `../../../../assets/images/default-album.png`;
+    }
   }
 
   onMouseOver() {
@@ -36,17 +47,27 @@ export class ArtistItemComponent implements OnInit {
   }
 
   updateArtist() {
-    this.updateArtistOut.emit(this.artist);
+    const param = (this.artist) ? this.artist : this.album;
+    this.updateArtistOut.emit(param);
   }
 
   deleteArtist() {
-    this.deleteArtistOut.emit(this.artist);
+    const param = (this.artist) ? this.artist : this.album;
+    this.deleteArtistOut.emit(param);
   }
 
   goArtistDetail() {
-    const { _id } = this.artist;
-    const url = `/artist/${_id}`
-    this.router.navigate([url]);
+    if (this.artist) {
+      const { _id } = this.artist;
+      const url = `/artist/${_id}`
+      this.router.navigate([url]);
+    }
+
+    if (this.album) {
+      const { _id } = this.album;
+      const url = `/album/${_id}`
+      this.router.navigate([url]);
+    }
   }
 
 }

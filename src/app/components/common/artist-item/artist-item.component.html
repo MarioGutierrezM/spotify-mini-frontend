@@ -8,8 +8,12 @@
     </div>
   </div>
 
-  <div class="name">
+  <div class="name" *ngIf="artist">
     {{ artist.name }}
+  </div>
+
+  <div class="name" *ngIf="album">
+    {{ album.title }}
   </div>
 
 </div>

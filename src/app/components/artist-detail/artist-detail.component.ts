@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ArtistService } from '@app/services/artist.service';
 import { UserService } from '@app/services/user.service';
@@ -30,7 +30,8 @@ export class ArtistDetailComponent implements OnInit {
     private _userService: UserService,
     private _albumService: AlbumService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -121,6 +122,12 @@ export class ArtistDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(data => {
       this.getArtistInfo();
     });
+  }
+
+  goToAlbum(album) {
+    const { _id } = album;
+    const url = `/album/${_id}`
+    this.router.navigate([url]);
   }
  
 }
