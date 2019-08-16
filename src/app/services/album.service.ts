@@ -17,4 +17,28 @@ export class AlbumService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.get(url, { headers }).pipe(map(res => res));
   }
+
+  getAlbum(token, albumId) {
+    const url = `${this.url}/album/${albumId}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.get(url, { headers }).pipe(map(res => res));
+  }
+
+  createAlbum(token, album) {
+    const url = `${this.url}/album`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.post(url, album, { headers }).pipe(map(res => res));
+  }
+
+  updateAlbum(token, album) {
+    const url = `${this.url}/album/${album._id}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.put(url, album, { headers }).pipe(map(res => res));
+  }
+
+  deleteAlbum(token, album) {
+    const url = `${this.url}/album/${album._id}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
+    return this._http.delete(url, { headers }).pipe(map(res => res));
+  }
 }

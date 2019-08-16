@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import { ArtistService } from '@app/services/artist.service';
 import { UserService } from '@app/services/user.service';
 import { AlbumService } from '@app/services/album.service';
 import { GLOBAL } from '@app/services/global';
+import { AlbumModalComponent } from '@app/components/common/album-modal/album-modal.component';
 
 @Component({
   selector: 'app-artist-detail',
@@ -19,14 +21,16 @@ export class ArtistDetailComponent implements OnInit {
   albumList: Array <object> = [];
   artistImgUrl: string = `${GLOBAL.url}/get-image-artist`;
   albumImgUrl = `${GLOBAL.url}/get-image-album`;
-  defautlArtistImg = '../../../assets/images/default-artist.jpeg';
-  defaultAlbumImg = '../../../assets/images/default-album.png';
+  defautlArtistImg: string = '../../../assets/images/default-artist.jpeg';
+  defaultAlbumImg: string = '../../../assets/images/default-album.png';
+  imgList: Array <string> = [];
 
   constructor(
     private _artistService: ArtistService,
     private _userService: UserService,
     private _albumService: AlbumService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -36,6 +40,7 @@ export class ArtistDetailComponent implements OnInit {
   }
 
   getArtistInfo() {
+    this.imgList = [];
     this.route.params.subscribe(async params => {
       const artist = await this._artistService.getArtistDetail(this.token, params.id).toPromise();
       this.artistData = artist['artist'];
@@ -43,7 +48,7 @@ export class ArtistDetailComponent implements OnInit {
 
       const albums = await this._albumService.getAlbumList(this.token, 1, this.artistData._id).toPromise();
       this.albumList = albums['albumList'].map(album => {
-        album.image = this.loadAlbumImage(album);
+        this.imgList.push(this.loadAlbumImage(album));
         return album;
       });
     });
@@ -60,6 +65,62 @@ export class ArtistDetailComponent implements OnInit {
     const imgUrl = `${this.albumImgUrl}/${album.image}`;
     const img = (validation) ? imgUrl : this.defaultAlbumImg;
     return img;
+  }
+
+  addAlbum() {
+    const dialogRef = this.dialog.open(AlbumModalComponent, {
+      width: '40rem',
+      data: {
+        title: 'Create New Album',
+        btnText: 'Create Album',
+        alertSuccesText: 'Album has been created',
+        alertErrorText: "Album couldn't be created",
+        modalMode: 'create',
+        artist: this.artistData
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      this.getArtistInfo();
+    });
+  }
+
+  updateAlbum(album) {
+    const dialogRef = this.dialog.open(AlbumModalComponent, {
+      width: '40rem',
+      data: {
+        title: 'Update Album',
+        btnText: 'Update Album',
+        alertSuccesText: 'Album has been updated',
+        alertErrorText: "Album couldn't be updated",
+        modalMode: 'edit',
+        artist: this.artistData,
+        album
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      this.getArtistInfo();
+    });
+  }
+
+  deleteAlbum(album) {
+    const dialogRef = this.dialog.open(AlbumModalComponent, {
+      width: '40rem',
+      data: {
+        title: 'Delete Album',
+        btnText: 'Delete Album',
+        alertSuccesText: 'Album has been deleted',
+        alertErrorText: "Album couldn't be deleted",
+        modalMode: 'delete',
+        artist: this.artistData,
+        album
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      this.getArtistInfo();
+    });
   }
  
 }

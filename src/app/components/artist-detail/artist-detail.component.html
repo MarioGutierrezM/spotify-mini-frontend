@@ -3,6 +3,9 @@
   <div class="artist-detail-card">
     <div class="card-header">
       <h1>Artist</h1>
+      <button class="btn btn-secondary btn-custom" *ngIf="identity.role === 'ROLE_ADMIN'" (click)="addAlbum()">
+        <i class="material-icons"> playlist_add </i> Add Album
+      </button>
     </div>
 
     <div class="card-body" *ngIf="artistData">
@@ -14,11 +17,16 @@
       </div>
 
       <div class="artist-albums-list" *ngIf="albumList.length > 0">
-        <div class="artist-album" *ngFor=" let album of albumList">
-          <img class="artist-img" src="{{ album.image }}">
+        <div class="artist-album" *ngFor=" let album of albumList; let i = index">
+          <img class="artist-img" src="{{ imgList[i] }}">
           <div class="artist-texts">
             <h3> {{ album.title }}</h3>
             <h4> {{ album.description }}</h4>
+            <div class="artist-btns"> 
+              <i class="material-icons action-icon" (click)="goToAlbum(album)"> send </i> 
+              <i class="material-icons action-icon" (click)="updateAlbum(album)" *ngIf="identity.role === 'ROLE_ADMIN'"> create </i> 
+              <i class="material-icons action-icon" (click)="deleteAlbum(album)" *ngIf="identity.role === 'ROLE_ADMIN'"> delete </i> 
+            </div>
           </div>
         </div>
       </div>

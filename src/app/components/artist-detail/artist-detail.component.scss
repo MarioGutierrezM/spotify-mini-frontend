@@ -84,6 +84,16 @@
 
           }
 
+          .artist-btns {
+            .action-icon {
+              margin-right: 1rem;
+              color: white;
+            }
+            .action-icon:hover {
+              color: $green-primary;
+            }
+          }
+
           .artist-img {
             width: 10rem;
             height: auto;

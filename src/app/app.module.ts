@@ -18,6 +18,7 @@ import { ArtistModalComponent } from './components/common/artist-modal/artist-mo
 import { ArtistItemComponent } from './components/common/artist-item/artist-item.component';
 import { PaginationBarComponent } from './components/common/pagination-bar/pagination-bar.component';
 import { ArtistDetailComponent } from './components/artist-detail/artist-detail.component';
+import { AlbumModalComponent } from './components/common/album-modal/album-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ArtistDetailComponent } from './components/artist-detail/artist-detail.
     ArtistModalComponent,
     ArtistItemComponent,
     PaginationBarComponent,
-    ArtistDetailComponent
+    ArtistDetailComponent,
+    AlbumModalComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { ArtistDetailComponent } from './components/artist-detail/artist-detail.
   bootstrap: [AppComponent],
   entryComponents: [
     ArtistModalComponent,
+    AlbumModalComponent
   ]
 })
 export class AppModule { }

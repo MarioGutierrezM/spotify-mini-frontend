@@ -1,0 +1,71 @@
+<div class="artist-modal">
+  <div class="header">
+    <h1> {{ title }}</h1>
+    <h2> <i class="material-icons pointer" (click)="closeModal()"> clear </i> </h2>
+  </div>
+
+  <div class="body">
+    <form class="form" [formGroup]="albumForm" (ngSubmit)="onSubmit()">
+      <div class="form-row-custom">
+        <input
+          type="text"
+          placeholder="Title"
+          class="form-control"
+          name="title"
+          formControlName="title"
+          [ngClass]="{'is-invalid': albumForm.controls.title.errors && albumForm.controls.title.dirty }" />
+      </div>
+
+      <div class="form-row-custom">
+        <input
+          type="text"
+          placeholder="Description"
+          class="form-control"
+          name="description"
+          formControlName="description"
+          [ngClass]="{'is-invalid': albumForm.controls.description.errors && albumForm.controls.description.dirty }" />
+      </div>
+
+      <div class="form-row-custom">
+        <input
+          type="text"
+          placeholder="Year"
+          class="form-control"
+          name="year"
+          formControlName="year"
+          [ngClass]="{'is-invalid': albumForm.controls.year.errors && albumForm.controls.year.dirty }" />
+      </div>
+
+      <!-- <div class="form-row-custom">
+        <input
+          type="text"
+          placeholder="Description"
+          class="form-control"
+          name="description"
+          formControlName="description"
+          [ngClass]="{'is-invalid': albumForm.controls.description.errors && albumForm.controls.description.dirty }" />
+      </div> -->
+        
+      <div class="form-row-custom" *ngIf="modalMode !== 'create'">
+        <img src="{{ imageUrl }}" class="img-container"/>
+      </div>
+        
+      <div class="form-row-custom" *ngIf="modalMode !== 'create'">
+        <input
+          (change)="fileChangeEvent($event)"
+          type="file"
+          placeholder="Image"
+          [ngClass]="{'is-invalid': albumForm.controls.image.errors && albumForm.controls.image.dirty }"
+          [disabled]="modalMode == 'delete'"
+        />
+      </div>
+      <input type="submit" value="{{ btnText }}" class="btn btn-primary btn-custom" [disabled]="albumForm.status !== 'VALID'" />
+    </form>
+
+    <div class="alert animated fadeIn" *ngIf="alertMessage" [ngClass]="{'alert-danger': !alertSuccess, 'alert-success': alertSuccess }">
+      {{ alertMessage }}
+    </div>
+
+  </div>
+</div>
+  
