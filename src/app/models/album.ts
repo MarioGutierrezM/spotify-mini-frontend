@@ -4,4 +4,5 @@ export class Album {
   year: String;
   image: String;
   artist: String;
+  _id: String;
 }

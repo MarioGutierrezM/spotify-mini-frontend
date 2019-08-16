@@ -6,6 +6,7 @@ import { ArtistListComponent } from '@app/components/artist-list/artist-list.com
 import { AlbumListComponent } from '@app/components/album-list/album-list.component';
 import { HomeComponent } from '@app/components/home/home.component';
 import { ArtistDetailComponent } from '@app/components/artist-detail/artist-detail.component';
+import { AlbumDetailComponent } from '@app/components/album-detail/album-detail.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'album-list', component: AlbumListComponent },
   { path: 'user-info', component: UserEditComponent },
   { path: 'artist/:id', component: ArtistDetailComponent },
+  { path: 'album/:id', component: AlbumDetailComponent },
   { path: '**', component: HomeComponent },
 ];
 

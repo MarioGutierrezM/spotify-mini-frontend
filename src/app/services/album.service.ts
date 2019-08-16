@@ -12,8 +12,8 @@ export class AlbumService {
 
   constructor(private _http: HttpClient) { }
 
-  getAlbumList(token, page, artist) {
-    const url = `${this.url}/album-list/${page}/${artist}`;
+  getAlbumList(token, page, artist?) {
+    const url = (artist) ? `${this.url}/album-list/${page}/${artist}` : `${this.url}/album-list/${page}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.get(url, { headers }).pipe(map(res => res));
   }
