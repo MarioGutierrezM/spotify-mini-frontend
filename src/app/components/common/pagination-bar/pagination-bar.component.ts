@@ -46,7 +46,7 @@ export class PaginationBarComponent implements OnInit {
 
   validate() {
     this.prevDisable = (this.currentPage === 1) ? true : false;
-    this.nextDisable = (this.currentPage === this.pagesNumber - 2 || this.currentPage === this.pagesNumber - 1) ? true : false;
+    this.nextDisable = (this.currentPage === this.pagesNumber - 2 || this.currentPage === this.pagesNumber - 1 || (this.currentPage === this.pagesNumber && this.pagesNumber === 1) ) ? true : false;
 
     this.btn2Disable = (this.currentPage + 1 > this.pagesNumber) ? true : false;
     this.btn3Disable = (this.currentPage + 2 > this.pagesNumber) ? true : false;
