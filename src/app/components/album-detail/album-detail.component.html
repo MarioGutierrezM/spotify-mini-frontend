@@ -1,3 +1,46 @@
-<p>
-  album-detail works!
-</p>
+<div class="album-detail">
+
+  <div class="album-detail-card">
+    <div class="card-header">
+      <h1>Album</h1>
+      <button class="btn btn-secondary btn-custom" *ngIf="identity.role === 'ROLE_ADMIN'" (click)="addSong()">
+        <i class="material-icons"> playlist_add </i> Add Song
+      </button>
+    </div>
+
+    <div class="card-body" *ngIf="albumData">
+
+      <div class="album-info">
+        <img class="album-img" src="{{ albumData.image }}">
+        <h3> {{ albumData.title }}</h3>
+        <h4> {{ albumData.description }}</h4>
+        <h4> {{ albumData.year }}</h4>
+      </div>
+
+      <div class="album-songs-list" *ngIf="songList.length > 0">
+        <div class="album-songs" *ngFor=" let song of songList; let i = index">
+          <div class="song-texts">
+            <div class="text">
+              <h4 class="mr-1"> {{ song.number }}.</h4>
+              <h4 class="mr-1"> {{ song.name }}</h4>
+            </div>
+            <div class="text">
+              <h4 class="mr-2"> {{ song.duration }}</h4>
+              <div class="song-btns"> 
+                <i class="material-icons action-icon" (click)="playSong(song)"> send </i> 
+                <i class="material-icons action-icon" (click)="updateSong(song)" *ngIf="identity.role === 'ROLE_ADMIN'"> create </i> 
+                <i class="material-icons action-icon" (click)="deleteSong(song)" *ngIf="identity.role === 'ROLE_ADMIN'"> delete </i> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="album-song-list" *ngIf="songList.length === 0">
+        <h3> This album does not have songs! </h3>
+      </div>
+
+    </div>
+  </div>
+
+</div>
