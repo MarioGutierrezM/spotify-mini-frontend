@@ -1,0 +1,65 @@
+@import '../../../../assets/variables.scss';
+
+.song-modal {
+  padding: 0;
+  .header {
+    padding: 1rem;
+    background-color: $green-primary;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .body{
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid black;
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .form-row-custom {
+        margin-bottom: 1rem;
+        width: 100%;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+        .hasntFile {
+          color: red;
+        }
+        
+        .hasFile {
+          color: green;
+        }
+      }
+
+      .btn-custom {
+        background-color: $green-primary;
+        border-color: $green-primary;
+      }
+
+      .img-container {
+        width: 10rem;
+        height: 10rem;
+      }
+    }
+
+    .alert {
+      margin-top: 1rem;
+    }
+  }
+  .pointer {
+    cursor: pointer;
+  }
+}
+
+.dialog-class{
+  padding: 0;
+}

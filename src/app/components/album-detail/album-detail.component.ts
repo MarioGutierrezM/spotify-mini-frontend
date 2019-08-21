@@ -5,7 +5,7 @@ import { UserService } from '@app/services/user.service';
 import { AlbumService } from '@app/services/album.service';
 import { SongService } from '@app/services/song.service';
 import { GLOBAL } from '@app/services/global';
-import { AlbumModalComponent } from '@app/components/common/album-modal/album-modal.component';
+import { SongModalComponent } from '@app/components/common/song-modal/song-modal.component';
 
 @Component({
   selector: 'app-album-detail',
@@ -59,12 +59,50 @@ export class AlbumDetailComponent implements OnInit {
 
   }
 
-  updateSong() {
-
+  addSong () {
+    const data = {
+      title: 'Create New Song',
+      btnText: 'Create Song',
+      alertSuccesText: 'Song has been created',
+      alertErrorText: "Song couldn't be created",
+      modalMode: 'create',
+      album: this.albumData
+    };
+    this.showDialog(data);
   }
 
-  deleteSong() {
-    
+  updateSong(song: object) {
+    const data = {
+      title: 'Update Song',
+      btnText: 'Update Song',
+      alertSuccesText: 'Song has been updated',
+      alertErrorText: "Song couldn't be updated",
+      modalMode: 'edit',
+      song
+    };
+    this.showDialog(data);
+  }
+
+  deleteSong(song: object) {
+    const data = {
+      title: 'Delete Song',
+      btnText: 'Delete Song',
+      alertSuccesText: 'Song has been deleted',
+      alertErrorText: "Song couldn't be deleted",
+      modalMode: 'delete',
+      song
+    };
+    this.showDialog(data);
+  }
+
+  showDialog(data: object) {
+    const dialog = this.dialog.open(SongModalComponent, {
+      width: '40rem',
+      data
+    });
+    dialog.afterClosed().subscribe(data => {
+      this.getArtistInfo();
+    });
   }
 
 }

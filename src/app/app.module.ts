@@ -20,6 +20,7 @@ import { PaginationBarComponent } from './components/common/pagination-bar/pagin
 import { ArtistDetailComponent } from './components/artist-detail/artist-detail.component';
 import { AlbumModalComponent } from './components/common/album-modal/album-modal.component';
 import { AlbumDetailComponent } from './components/album-detail/album-detail.component';
+import { SongModalComponent } from './components/common/song-modal/song-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AlbumDetailComponent } from './components/album-detail/album-detail.com
     PaginationBarComponent,
     ArtistDetailComponent,
     AlbumModalComponent,
-    AlbumDetailComponent
+    AlbumDetailComponent,
+    SongModalComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { AlbumDetailComponent } from './components/album-detail/album-detail.com
   bootstrap: [AppComponent],
   entryComponents: [
     ArtistModalComponent,
-    AlbumModalComponent
+    AlbumModalComponent,
+    SongModalComponent
   ]
 })
 export class AppModule { }

@@ -1,0 +1,62 @@
+<div class="song-modal">
+  <div class="header">
+    <h1> {{ title }}</h1>
+    <h2> <i class="material-icons pointer" (click)="closeModal()"> clear </i> </h2>
+  </div>
+  
+  <div class="body">
+    <form class="form" [formGroup]="songForm" (ngSubmit)="onSubmit()">
+      <div class="form-row-custom">
+        <input
+          type="text"
+          placeholder="Name"
+          class="form-control"
+          name="name"
+          formControlName="name"
+          [ngClass]="{'is-invalid': songForm.controls.name.errors && songForm.controls.name.dirty }" />
+        </div>
+
+      <div class="form-row-custom">
+        <input
+          type="number"
+          placeholder="Number"
+          class="form-control"
+          name="number"
+          formControlName="number"
+          [ngClass]="{'is-invalid': songForm.controls.number.errors && songForm.controls.number.dirty }" />
+      </div>
+
+      <div class="form-row-custom">
+        <input
+          type="text"
+          placeholder="Duration"
+          class="form-control"
+          name="duration"
+          formControlName="duration"
+          [ngClass]="{'is-invalid': songForm.controls.duration.errors && songForm.controls.duration.dirty }" />
+      </div>
+        
+      <div class="form-row-custom" *ngIf="modalMode !== 'create'">
+        Has File: <i class="material-icons hasntFile" [ngClass]="{'hasFile': hasFile}"> {{ iconFile }} </i>
+      </div>
+        
+      <div class="form-row-custom" *ngIf="modalMode !== 'create'">
+        <input
+          (change)="fileChangeEvent($event)"
+          type="file"
+          placeholder="File"
+          class="form-control"
+          [ngClass]="{'is-invalid': songForm.controls.file.errors && songForm.controls.file.dirty }"
+          [disabled]="modalMode == 'delete'"
+        />
+      </div>
+      <input type="submit" value="{{ btnText }}" class="btn btn-primary btn-custom" [disabled]="songForm.status !== 'VALID'" />
+    </form>
+
+    <div class="alert animated fadeIn" *ngIf="alertMessage" [ngClass]="{'alert-danger': !alertSuccess, 'alert-success': alertSuccess }">
+      {{ alertMessage }}
+    </div>
+
+  </div>
+</div>
+  

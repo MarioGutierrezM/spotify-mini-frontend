@@ -42,8 +42,8 @@ export class SongService {
     return this._http.put(url, song, { headers }).pipe(map(res => res));
   }
 
-  deleteSong(token, songId) {
-    const url = `${this.url}/song/${songId}`;
+  deleteSong(token, song) {
+    const url = `${this.url}/song/${song._id}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.delete(url, { headers }).pipe(map(res => res));
   }
