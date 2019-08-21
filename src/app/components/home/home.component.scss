@@ -1,13 +1,6 @@
 @import '../../../assets/variables.scss';
 
 .home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url("../../../assets/images/login-back.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
 
   .card-home {
     border: 1px solid white;
