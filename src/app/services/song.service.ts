@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { GLOBAL } from '@app/services/global';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { GLOBAL } from '@app/services/global';
 export class SongService {
 
   url: String = GLOBAL.url;
+  songPlayed = new Subject();
 
   constructor(private _http: HttpClient) { }
 
@@ -46,5 +48,9 @@ export class SongService {
     const url = `${this.url}/song/${song._id}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': token });
     return this._http.delete(url, { headers }).pipe(map(res => res));
+  }
+
+  playSong(song) {
+    this.songPlayed.next(song)
   }
 }

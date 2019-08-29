@@ -1,0 +1,35 @@
+@import '../../../assets/variables.scss';
+
+.song-player {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  padding: 1rem;
+  border-top: 3px;
+
+  .flex-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+  }
+
+  .img-container {
+    .img-style {
+      width: 70%;
+      height: auto;
+    }
+  }
+
+  .player-info {
+    flex-direction: column;
+  }
+
+  .player-audio {
+    height: 2rem;
+    width: 12rem;
+  }
+
+}

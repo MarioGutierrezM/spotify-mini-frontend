@@ -1,0 +1,18 @@
+<div class="song-player">
+
+  <div class="img-container flex-c">
+    <img src="{{ urlImg }}" class="img-style">
+  </div>
+
+  <div class="player-info flex-c">
+    <div class="text"> {{ name }} </div>
+    <div class="text"> {{ artist }} </div>
+  </div>
+
+  <div>
+    <audio controls class="player-audio" #player id="player">
+      <source #mp3 id="mp3" src="{{ songUrl }}" type="audio/mp3"/>
+    </audio>
+  </div>
+
+</div>

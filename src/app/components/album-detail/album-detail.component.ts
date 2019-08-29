@@ -55,8 +55,11 @@ export class AlbumDetailComponent implements OnInit {
     album.image = img;
   }
 
-  playSong() {
-
+  playSong(song) {
+    const { artist, image } = this.albumData;
+    song.artist = artist.name;
+    song.image = image;
+    this._songService.playSong(song);
   }
 
   addSong () {

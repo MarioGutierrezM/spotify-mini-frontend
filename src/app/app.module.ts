@@ -21,6 +21,7 @@ import { ArtistDetailComponent } from './components/artist-detail/artist-detail.
 import { AlbumModalComponent } from './components/common/album-modal/album-modal.component';
 import { AlbumDetailComponent } from './components/album-detail/album-detail.component';
 import { SongModalComponent } from './components/common/song-modal/song-modal.component';
+import { SongPlayerComponent } from './components/song-player/song-player.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SongModalComponent } from './components/common/song-modal/song-modal.co
     ArtistDetailComponent,
     AlbumModalComponent,
     AlbumDetailComponent,
-    SongModalComponent
+    SongModalComponent,
+    SongPlayerComponent
   ],
   imports: [
     BrowserModule,
